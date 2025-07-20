@@ -14,20 +14,20 @@ type Props = {
 
 export default function CourseCard({ course }: Props) {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg shadow-md text-white">
+    <div className="bg-gray-900 p-4 rounded-lg shadow-md text-white">
       <img
         src={course.mascot_image}
         alt={course.title}
         className="w-full h-40 object-cover rounded-md mb-2"
       />
-      <h2 className="text-xl font-semibold">{course.title}</h2>
-      <p className="text-sm">{course.description}</p>
-      <p className="mt-2 text-yellow-400">Reward: {course.coin_reward} coins</p>
+      <h2 className="text-xl font-bold">{course.title}</h2>
+      <p className="text-sm mb-1">{course.description}</p>
+      <p className="text-yellow-400">Reward: {course.coin_reward} coins</p>
       <a
         href={course.video_url}
         target="_blank"
         rel="noopener noreferrer"
-        className="block mt-2 text-blue-400 underline"
+        className="inline-block mt-2 text-blue-400 underline"
       >
         Watch Video
       </a>
