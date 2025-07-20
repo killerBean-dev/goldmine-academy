@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import CourseCard from "./CourseCard";
@@ -5,10 +6,11 @@ import CourseCard from "./CourseCard";
 interface Course {
   id: number;
   title: string;
+  description: string;
   category: string;
-  mascot_image: string;
   coin_reward: number;
-  difficulty: string;
+  video_url: string;
+  mascot_image: string;
 }
 
 export default function CourseGrid() {
@@ -18,31 +20,31 @@ export default function CourseGrid() {
   useEffect(() => {
     async function fetchCourses() {
       const { data, error } = await supabase.from("courses").select("*");
-      if (error) console.error("Error loading courses:", error);
-      else setCourses(data || []);
+      if (error) {
+        console.error("Error fetching courses:", error.message);
+      } else {
+        setCourses(data || []);
+      }
       setLoading(false);
     }
-
     fetchCourses();
   }, []);
 
-  if (loading) return <p className="text-white text-center">Loading courses...</p>;
-
   return (
-    <div className="min-h-screen bg-black text-white px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-6">Available Courses</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
-        {courses.map((course) => (
-          <CourseCard
-            key={course.id}
-            title={course.title}
-            category={course.category}
-            mascotImage={course.mascot_image}
-            coinReward={course.coin_reward}
-            difficulty={course.difficulty}
-          />
-        ))}
-      </div>
+    <div className="p-4">
+      <h1 className="text-white text-2xl font-bold mb-4">Available Courses</h1>
+      {loading ? (
+        <p className="text-white">Loading...</p>
+      ) : courses.length === 0 ? (
+        <p className="text-white">No courses found.</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {courses.map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
