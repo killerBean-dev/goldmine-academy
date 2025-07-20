@@ -8,10 +8,18 @@ interface Course {
   mascot_image: string;
 }
 
-export default function CourseCard({ course }: { course: Course }) {
+type Props = {
+  course: Course;
+};
+
+export default function CourseCard({ course }: Props) {
   return (
     <div className="bg-gray-800 p-4 rounded-lg shadow-md text-white">
-      <img src={course.mascot_image} alt={course.title} className="w-full h-40 object-cover rounded-md mb-2" />
+      <img
+        src={course.mascot_image}
+        alt={course.title}
+        className="w-full h-40 object-cover rounded-md mb-2"
+      />
       <h2 className="text-xl font-semibold">{course.title}</h2>
       <p className="text-sm">{course.description}</p>
       <p className="mt-2 text-yellow-400">Reward: {course.coin_reward} coins</p>
