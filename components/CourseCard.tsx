@@ -1,3 +1,7 @@
+// components/CourseCard.tsx
+
+import React from "react";
+
 interface Course {
   id: number;
   title: string;
@@ -8,29 +12,33 @@ interface Course {
   mascot_image: string;
 }
 
-type Props = {
+interface CourseCardProps {
   course: Course;
-};
+}
 
-export default function CourseCard({ course }: Props) {
+const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   return (
-    <div className="bg-gray-900 p-4 rounded-lg shadow-md text-white">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden p-4">
       <img
         src={course.mascot_image}
-        alt={course.title}
-        className="w-full h-40 object-cover rounded-md mb-2"
+        alt="Mascot"
+        className="w-full h-40 object-contain mb-4"
       />
-      <h2 className="text-xl font-bold">{course.title}</h2>
-      <p className="text-sm mb-1">{course.description}</p>
-      <p className="text-yellow-400">Reward: {course.coin_reward} coins</p>
+      <h2 className="text-xl font-bold mb-2">{course.title}</h2>
+      <p className="text-gray-600 text-sm mb-2">{course.description}</p>
+      <p className="text-xs text-indigo-600 font-semibold">
+        Category: {course.category} • Reward: {course.coin_reward} coins
+      </p>
       <a
         href={course.video_url}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block mt-2 text-blue-400 underline"
+        className="inline-block mt-4 text-sm text-white bg-indigo-600 px-3 py-1 rounded-xl"
       >
         Watch Video
       </a>
     </div>
   );
-}
+};
+
+export default CourseCard;
