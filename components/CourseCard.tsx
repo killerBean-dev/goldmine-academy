@@ -2,41 +2,31 @@
 
 import React from "react";
 
-interface Course {
+export type Course = {
   id: number;
   title: string;
   description: string;
-  category: string;
-  coin_reward: number;
-  video_url: string;
   mascot_image: string;
-}
+  coin_reward: number;
+};
 
-interface CourseCardProps {
+type Props = {
   course: Course;
-}
+};
 
-const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+const CourseCard: React.FC<Props> = ({ course }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden p-4">
+    <div className="bg-gray-800 text-white p-4 rounded-2xl shadow-lg">
       <img
         src={course.mascot_image}
-        alt="Mascot"
-        className="w-full h-40 object-contain mb-4"
+        alt={course.title}
+        className="w-full h-40 object-cover rounded-xl mb-4"
       />
-      <h2 className="text-xl font-bold mb-2">{course.title}</h2>
-      <p className="text-gray-600 text-sm mb-2">{course.description}</p>
-      <p className="text-xs text-indigo-600 font-semibold">
-        Category: {course.category} • Reward: {course.coin_reward} coins
+      <h3 className="text-lg font-bold mb-2">{course.title}</h3>
+      <p className="text-sm mb-2">{course.description}</p>
+      <p className="text-yellow-400 font-semibold">
+        🎯 Earn {course.coin_reward} coins
       </p>
-      <a
-        href={course.video_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block mt-4 text-sm text-white bg-indigo-600 px-3 py-1 rounded-xl"
-      >
-        Watch Video
-      </a>
     </div>
   );
 };
