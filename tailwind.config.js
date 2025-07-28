@@ -1,7 +1,12 @@
+// tailwind.config.js
 module.exports = {
-  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  darkMode: 'class', // Enables manual dark mode via class="dark"
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
